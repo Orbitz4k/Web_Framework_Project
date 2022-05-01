@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Solicitors index{% endblock %}
+
+{% block body %}
+    <h1>Solicitors index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Cases Won</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for solicitor in solicitors %}
+            <tr>
+                <td>{{ solicitor.id }}</td>
+                <td>{{ solicitor.Name }}</td>
+                <td>{{ solicitor.Courts }}</td>
+                <td>{{ solicitor.Clients }}</td>
+            </tr>
+            {% if is_granted('ROLE_ADMIN') %}
+            <td>
+                <a href="{{ path('solicitors_show', {'id': solicitor.id}) }}">show</a>
+                <a href="{{ path('solicitors_edit', {'id': solicitor.id}) }}">edit</a>
+            </td>
+            {% endif %}
+            {% if is_granted('ROLE_LAWYER') %}
+                <td>
+                    <a href="{{ path('solicitors_show', {'id': solicitor.id}) }}">show</a>
+                    <a href="{{ path('solicitors_edit', {'id': solicitor.id}) }}">edit</a>
+                </td>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

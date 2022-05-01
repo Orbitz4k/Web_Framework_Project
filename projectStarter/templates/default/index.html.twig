@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}home page{% endblock %}
+
+{% block body %}
+
+    <h1>Nelson and Murdock</h1>
+    <p>
+      Please sign up with an account above to continue
+    </p>
+    {% if is_granted('ROLE_USER') %}
+        <p>
+            Welcome to Nelson and Murdock
+        </p>
+        Welcome to our company thanks for signing up! We are a small soliciting agency run by 2 people</p>
+       <p>
+           So far we have broken only about 30 laws and have inside connection to da police lol
+       </p>
+        <a href="{{ path ('solicitors_index') }}">
+            To view our stats and our court cases won please click here
+        </a>
+        <br>
+
+
+    {% endif %}
+    {% if is_granted('ROLE_SECRET') %}
+        <p>WELCOME BACK DAREDEVIL</p>
+
+        <body style="background-color:red;">
+
+        <a href="{{ path ('lawyers') }}">
+            To enter daredevil page click here
+        </a>
+
+
+    {% endif %}
+
+
+    {% if is_granted('ROLE_LAWYER') %}
+        Add your clients here
+        <br>
+        <a href="{{ path ('clients_index') }}">
+            Clients page
+        </a>
+        <br>
+        <a href="{{ path ('solicitors_index') }}">
+            Edit your stats here
+        </a>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        LINK FOR ALL DB EDITS
+        <br>
+        <a href="{{ path ('clients_index') }}">
+            Clients page
+        </a>
+        <br>
+        <a href="{{ path ('solicitors_index') }}">
+            Solicitors page
+        </a>
+        <br>
+        <a href="{{ path ('user_index') }}">
+            Users page
+        </a>
+    {% endif %}
+
+{% endblock %}

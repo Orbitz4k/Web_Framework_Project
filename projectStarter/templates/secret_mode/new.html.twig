@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SecretMode{% endblock %}
+
+{% block body %}
+    <h1>Create new SecretMode</h1>
+<body style="background-color:red;">
+    {{ include('secret_mode/_form.html.twig') }}
+
+    <a href="{{ path('secret_mode_index') }}">back to list</a>
+{% endblock %}
