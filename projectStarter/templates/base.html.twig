@@ -34,10 +34,12 @@
                 <a href="{{ path ('app_register') }}">
                  register
                 </a>
+            {% if not app.user('ROLE_USER') %}
             <li>
                 <a href="{{ path ('app_login') }}">
                    login
                 </a>
+                {% endif %}
             </li>
             <li>
                 <a href="{{ path ('solicitors_index') }}">
