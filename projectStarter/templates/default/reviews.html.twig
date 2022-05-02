@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Rating from 0/100</th>
+            <th>Review</th>
+            <th>Rekekekemend</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.Rating }}</td>
+                <td>{{ review.Review }}</td>
+                <td>{{ review.Rekekekemend ? 'Yes' : 'No' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_USER') %}
+    <a href="{{ path('app_reviews_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}
+
+
