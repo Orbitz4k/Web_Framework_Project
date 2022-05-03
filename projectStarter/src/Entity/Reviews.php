@@ -17,7 +17,7 @@ class Reviews
     private $Rating;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $Review;
+    private $review;
 
     #[ORM\Column(type: 'boolean')]
     private $Rekekekemend;
@@ -41,12 +41,12 @@ class Reviews
 
     public function getReview(): ?string
     {
-        return $this->Review;
+        return $this->review;
     }
 
-    public function setReview(string $Review): self
+    public function setReview(string $review): self
     {
-        $this->Review = $Review;
+        $this->review = $review;
 
         return $this;
     }

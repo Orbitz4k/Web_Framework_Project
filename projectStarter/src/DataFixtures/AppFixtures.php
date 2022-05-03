@@ -6,6 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
 use App\Factory\UserFactory;
+use App\Entity\Reviews;
 use App\Entity\Solicitors;
 use App\Entity\Clients;
 
@@ -13,11 +14,12 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $client = new Clients();
-        $client->setname('Shane');
-        $client->setAge(18);
-        $client->setSolicitor('Matt Murdock');
-
+        $reviews = new Reviews();
+        $reviews->setRating(10);
+        $reviews->setRekekekemend(true);
+        $reviews->setreview('wow so good and amazing');
+        $manager->persist($reviews);
+        $manager->flush();
 
         $solicitor = new Solicitors();
         $solicitor->setName("Matt Murdock");

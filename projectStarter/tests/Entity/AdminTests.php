@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\SolicitorsRepository;
-use App\Repository\ClientsRepository;
 
 class AdminTests extends WebTestCase
 {

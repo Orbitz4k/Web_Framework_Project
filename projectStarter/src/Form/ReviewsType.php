@@ -13,7 +13,7 @@ class ReviewsType extends AbstractType
     {
         $builder
             ->add('Rating')
-            ->add('Review')
+            ->add('review')
             ->add('Rekekekemend')
         ;
     }
