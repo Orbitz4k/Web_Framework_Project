@@ -17,7 +17,6 @@ class AppFixtures extends Fixture
         $client->setname('Shane');
         $client->setAge(18);
         $client->setSolicitor('Matt Murdock');
-        $client->setUser();
 
 
         $solicitor = new Solicitors();
