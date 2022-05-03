@@ -6,6 +6,7 @@ use App\Entity\SecretMode;
 use App\Form\SecretModeType;
 use App\Repository\SecretModeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/secret/mode')]
 class SecretModeController extends AbstractController
 {
+    #[IsGranted('ROLE_SECRET')]
     #[Route('/', name: 'secret_mode_index', methods: ['GET'])]
     public function index(SecretModeRepository $secretModeRepository): Response
     {
@@ -21,7 +23,7 @@ class SecretModeController extends AbstractController
             'secret_modes' => $secretModeRepository->findAll(),
         ]);
     }
-
+    #[IsGranted('ROLE_SECRET')]
     #[Route('/new', name: 'secret_mode_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -41,7 +43,7 @@ class SecretModeController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_SECRET')]
     #[Route('/{id}', name: 'secret_mode_show', methods: ['GET'])]
     public function show(SecretMode $secretMode): Response
     {
@@ -49,7 +51,7 @@ class SecretModeController extends AbstractController
             'secret_mode' => $secretMode,
         ]);
     }
-
+    #[IsGranted('ROLE_SECRET')]
     #[Route('/{id}/edit', name: 'secret_mode_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SecretMode $secretMode, EntityManagerInterface $entityManager): Response
     {
@@ -67,7 +69,7 @@ class SecretModeController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_SECRET')]
     #[Route('/{id}', name: 'secret_mode_delete', methods: ['POST'])]
     public function delete(Request $request, SecretMode $secretMode, EntityManagerInterface $entityManager): Response
     {

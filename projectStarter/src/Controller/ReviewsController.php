@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Reviews;
 use App\Form\ReviewsType;
 use App\Repository\ReviewsRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ class ReviewsController extends AbstractController
             'reviews' => $reviewsRepository->findAll(),
         ]);
     }
-
+    #[IsGranted('ROLE_USER')]
     #[Route('/new', name: 'app_reviews_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ReviewsRepository $reviewsRepository): Response
     {
@@ -65,7 +66,7 @@ class ReviewsController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}', name: 'app_reviews_delete', methods: ['POST'])]
     public function delete(Request $request, Reviews $review, ReviewsRepository $reviewsRepository): Response
     {

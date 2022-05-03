@@ -32,7 +32,6 @@ class SecretTest extends WebTestCase
         $client->submit($client->request($httpMethod, $url)->selectButton($submitButtonName)->form([
             'secret_mode[Daredevil]'  => '1',
             'secret_mode[successfulNights]'  => '19',
-
         ]));
 
         $solicitors = $solicitorsRepository->findAll();
