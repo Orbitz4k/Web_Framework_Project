@@ -70,7 +70,7 @@ class AdminTests extends WebTestCase
         $client->submit($client->request($httpMethod, $url)->selectButton($submitButtonName)->form([
             'solicitors[Courts]'  => 'Boston',
             'solicitors[Clients]'  => '10',
-            'solicitors[name]'  => 'Weeeee',
+            'solicitors[name]'  => 'It changes!',
         ]));
 
         $solicitors = $solicitorsRepository->findAll();
