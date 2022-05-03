@@ -26,7 +26,7 @@ class publicTests extends WebTestCase
     public function testPublicCantSeeUserIndex(): void
     {
         $method = 'GET';
-        $url = '/user/new';
+        $url = '/user/';
         $accessDeniedResponseCode403 = Response::HTTP_FOUND;
         $client = static::createClient();
         $crawler = $client->request($method, $url);
