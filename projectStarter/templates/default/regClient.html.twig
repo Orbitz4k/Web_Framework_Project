@@ -23,7 +23,12 @@
                 <td>{{ client.Age }}</td>
                 <td>{{ client.Solicitor }}</td>
                 <td>{{ client.user }}</td>
-
+                {% if is_granted('ROLE_USER') or ('ROLE_ADMIN') %}
+                <td>
+                    <a href="{{ path('clients_show', {'id': client.id}) }}">show</a>
+                    <a href="{{ path('clients_edit', {'id': client.id}) }}">edit</a>
+                </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -32,4 +37,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('clients_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

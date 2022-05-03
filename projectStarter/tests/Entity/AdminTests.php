@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use App\Repository\SolicitorsRepository;
+use App\Repository\ClientsRepository;
 
 class AdminTests extends WebTestCase
 {
@@ -42,5 +43,19 @@ class AdminTests extends WebTestCase
         $solicitors = $solicitorsRepository->findAll();
 
         $this->assertCount($expectedNumberOfSolicitorsAfterOneCreated, $solicitors);
+    }
+    public function testRoleAdminUserCanGoToSolicitorsIndex(): void
+    {
+        $client = static::createClient();
+
+        $userName = 'matt';
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $testUser = $userRepository->findOneByusername($userName);
+        $client->loginUser($testUser);
+
+        $crawler = $client->request('GET', '/solicitors/');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Solicitors index');
     }
 }
