@@ -42,4 +42,28 @@ class UserTests extends WebTestCase
 
         $this->assertCount($expectedNumberOfSolicitorsAfterOneCreated, $solicitors);
     }
+    public function testRoleUserCanNOTSeeUserList(): void
+    {
+        // Arrange
+        $method = 'GET';
+        $url = '/user';
+        $userName = 'user';
+        $accessDeniedResponseCode403 = Response::HTTP_FORBIDDEN;
+
+        // create client that automatically follow re-directs
+        $client = static::createClient();
+        $client->followRedirects();
+
+        // login user
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $testUser = $userRepository->findOneByusername($userName);
+        $client->loginUser($testUser);
+
+        // Act
+        $crawler = $client->request($method, $url);
+
+        // Assert
+        $responseCode = $client->getResponse()->getStatusCode();
+        $this->assertSame($accessDeniedResponseCode403, $responseCode);
+    }
 }

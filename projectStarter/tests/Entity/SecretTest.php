@@ -9,7 +9,7 @@ use App\Repository\SecretModeRepository;
 
 class SecretTest extends WebTestCase
 {
-    public function testRoleSolicitorCanCreateSolicitors(){
+    public function testRoleSecretCanCreateNewData(){
         $client = static::createClient();
         $client->followRedirects();
 

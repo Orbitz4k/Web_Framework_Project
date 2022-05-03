@@ -49,7 +49,7 @@ class ReviewsController extends AbstractController
             'review' => $review,
         ]);
     }
-
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'app_reviews_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Reviews $review, ReviewsRepository $reviewsRepository): Response
     {
