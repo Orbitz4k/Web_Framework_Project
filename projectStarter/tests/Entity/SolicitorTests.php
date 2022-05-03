@@ -44,6 +44,39 @@ class SolicitorTests extends WebTestCase
 
         $this->assertCount($expectedNumberOfSolicitorsAfterOneCreated, $solicitors);
     }
+    public function testRoleSolicitorCanEditSolicitors(){
+        $client = static::createClient();
+        $client->followRedirects();
+
+        $solicitorsRepository = static::getContainer()->get(SolicitorsRepository::class);
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $userName = 'Matt Murdock';
+        $adminUser = $userRepository->findOneByusername($userName);
+
+        $solicitorName = 'Matt Murdock';
+        $solicitor = $solicitorsRepository->findByName($solicitorName);
+
+        $httpMethod = 'GET';
+        $url = '/solicitors/74/edit';
+
+        $solicitor = $solicitorsRepository->findAll();
+        $numberOfSolicitorsBeforeOneCreated = count($solicitor);
+        $expectedNumberOfSolicitorsAfterOneCreated = $numberOfSolicitorsBeforeOneCreated;
+
+        $client->loginUser($adminUser);
+
+        $submitButtonName = 'Update';
+        $client->submit($client->request($httpMethod, $url)->selectButton($submitButtonName)->form([
+            'solicitors[Courts]'  => 'Boston',
+            'solicitors[Clients]'  => '10',
+            'solicitors[name]'  => 'It changes!',
+        ]));
+
+        $solicitors = $solicitorsRepository->findAll();
+
+        $this->assertCount($expectedNumberOfSolicitorsAfterOneCreated, $solicitors);
+    }
     public function testRoleSolicitorUserCanGoToClientIndex(): void
     {
         $client = static::createClient();
