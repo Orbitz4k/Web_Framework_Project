@@ -17,7 +17,7 @@ class SecretMode
     private $Daredevil;
 
     #[ORM\Column(type: 'integer')]
-    private $SuccessfulNights;
+    private $successfulNights;
 
     public function getId(): ?int
     {
@@ -38,12 +38,12 @@ class SecretMode
 
     public function getSuccessfulNights(): ?int
     {
-        return $this->SuccessfulNights;
+        return $this->successfulNights;
     }
 
-    public function setSuccessfulNights(int $SuccessfulNights): self
+    public function setSuccessfulNights(int $successfulNights): self
     {
-        $this->SuccessfulNights = $SuccessfulNights;
+        $this->successfulNights = $successfulNights;
 
         return $this;
     }

@@ -13,7 +13,7 @@ class SecretModeType extends AbstractType
     {
         $builder
             ->add('Daredevil')
-            ->add('SuccessfulNights')
+            ->add('successfulNights')
         ;
     }
 
