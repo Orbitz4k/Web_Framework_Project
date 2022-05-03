@@ -48,5 +48,10 @@ class AppFixtures extends Fixture
             'password' => 'D',
             'role' => 'ROLE_SECRET'
         ]);
+        UserFactory::createOne([
+            'username' => 'user',
+            'password' => '12345',
+            'role' => 'ROLE_USER'
+        ]);
     }
 }
