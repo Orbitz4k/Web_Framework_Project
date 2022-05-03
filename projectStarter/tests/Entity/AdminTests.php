@@ -17,10 +17,10 @@ class AdminTests extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
 
         $userName = 'matt';
-        $adminUser = $userRepository->findOneByEmail($userName);
+        $adminUser = $userRepository->findOneByusername($userName);
 
-        $solicitorName = 'Foggy Nelson';
-        $solicitor = $solicitorsRepository->findOneByName($solicitorName);
+        $solicitorName = 'Matt Murdock';
+        $solicitor = $solicitorsRepository->findByName($solicitorName);
 
         $httpMethod = 'GET';
         $url = '/solicitors/new';
@@ -33,15 +33,14 @@ class AdminTests extends WebTestCase
 
         $submitButtonName = 'Save';
         $client->submit($client->request($httpMethod, $url)->selectButton($submitButtonName)->form([
-            'solicitor[Name]'  => 'Test Solicitor',
-            'solicitor[Courts]'  => 'Boston',
-            'solicitor[Clients]'  => '10',
-            'solicitor[Id]'  => $solicitor->getId(),
+            'solicitors[Courts]'  => 'Boston',
+            'solicitors[Clients]'  => '10',
+            'solicitors[name]'  => 'test',
+
         ]));
 
         $solicitors = $solicitorsRepository->findAll();
 
         $this->assertCount($expectedNumberOfSolicitorsAfterOneCreated, $solicitors);
-
     }
 }

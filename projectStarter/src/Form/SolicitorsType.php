@@ -14,6 +14,8 @@ class SolicitorsType extends AbstractType
         $builder
             ->add('Courts')
             ->add('Clients')
+            ->add('name')
+
         ;
     }
 

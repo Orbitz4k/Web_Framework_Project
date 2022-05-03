@@ -22,7 +22,7 @@ class UserCRUDTest extends WebTestCase
         $client->followRedirects();
 
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOnebyName($userName);
+        $testUser = $userRepository->findOneByusername($userName);
         $client->loginUser($testUser);
 
         $crawler = $client->request($method, $url);
@@ -45,7 +45,7 @@ class UserCRUDTest extends WebTestCase
         $client->followRedirects();
 
         $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByName($userName);
+        $testUser = $userRepository->findOneByusername($userName);
         $client->loginUser($testUser);
 
         $crawler = $client->request($method, $url);

@@ -14,7 +14,7 @@ class Clients
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $Name;
+    private $name;
 
     #[ORM\Column(type: 'integer')]
     private $Age;
@@ -29,12 +29,12 @@ class Clients
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
 
         return $this;
     }
