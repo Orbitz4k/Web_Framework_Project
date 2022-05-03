@@ -22,6 +22,9 @@ class Clients
     #[ORM\Column(type: 'string', length: 255)]
     private $Solicitor;
 
+    #[ORM\OneToOne(mappedBy: 'client', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,5 +64,31 @@ class Clients
         $this->Solicitor = $Solicitor;
 
         return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setClient(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getClient() !== $this) {
+            $user->setClient($this);
+        }
+
+        $this->user = $user;
+
+        return $this;
+    }
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }

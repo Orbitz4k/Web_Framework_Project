@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\ReviewsRepository;
+
+use App\Repository\ClientsRepository;
+use http\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,6 +50,14 @@ class DefaultController extends AbstractController
     {
         $template = 'default/reviews.html.twig';
         $argsArray = ['reviews'=>$reviewsRepository->findAll()];
+
+        return $this->render($template, $argsArray);
+    }
+    #[Route('/regClient', name: 'regClient')]
+    public function regClient(ClientsRepository $clientsRepository): Response
+    {
+        $template = 'default/regClient.html.twig';
+        $argsArray = ['clients'=>$clientsRepository->findAll()];
 
         return $this->render($template, $argsArray);
     }

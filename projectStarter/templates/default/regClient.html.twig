@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Client page{% endblock %}
+
+{% block body %}
+    <h1>Clients index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Case</th>
+            <th>Age</th>
+            <th>Solicitor</th>
+            <th>User That registered</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <td>{{ client.id }}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.Age }}</td>
+                <td>{{ client.Solicitor }}</td>
+                <td>{{ client.user }}</td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

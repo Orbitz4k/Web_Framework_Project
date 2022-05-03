@@ -15,6 +15,7 @@ class ClientsType extends AbstractType
             ->add('name')
             ->add('Age')
             ->add('Solicitor')
+            ->add('user')
         ;
     }
 
