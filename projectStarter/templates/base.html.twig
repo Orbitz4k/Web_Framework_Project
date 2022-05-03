@@ -26,56 +26,34 @@
         {% endblock %}
     </head>
     <body>
-        <ul>
-            <li>
-                <a href="/">
-                    home
-                </a>
-            </li>
-            <li>
-                <a href="{{ path ('app_register') }}">
-                 register
-                </a>
-            {% if not app.user('ROLE_USER') %}
-            <li>
-                <a href="{{ path ('app_login') }}">
-                   login
-                </a>
-                {% endif %}
-            </li>
-            <li>
-                <a href="{{ path ('solicitors_index') }}">
-                    Click here to see our statistics
-                </a>
-            </li>
-            {% if is_granted('ROLE_USER') %}
-            <li>
-                <a href="{{ path ('pricing') }}">
-                    Pricing
-                </a>
-            </li>
-            {% endif %}
-            {% if is_granted('ROLE_LAWYER') %}
-                <li>
-                    <a href="{{ path ('regClient') }}">
-                        See available clients
-                    </a>
-                </li>
-            {% endif %}
-            {% if is_granted('ROLE_USER') %}
-                <li>
-                    <a href="{{ path ('regClient') }}">
-                        Put in application
-                    </a>
-                </li>
-            {% endif %}
-            <li>
-                <a href="{{ path ('reviews') }}">
-                    Reviews
-                </a>
-            </li>
-        </ul>
-
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">N&M</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link" href="{{ path ('app_register') }}">Register</a>
+                    {% if not app.user('ROLE_USER') %}
+                    <a class="nav-link" href="{{ path ('app_login') }}">Login</a>
+                    {% endif %}
+                    <a class="nav-link" href="{{ path ('solicitors_index') }}">Stats</a>
+                    {% if is_granted('ROLE_USER') %}
+                    <a class="nav-link" href="{{ path ('pricing') }}">Pricing</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_LAWYER') %}
+                        <a class="nav-link" href="{{ path ('regClient') }}">See Clients</a>
+                    {% endif %}
+                    <a class="nav-link" href="{{ path ('reviews') }}">Reviews</a>
+                    {% if is_granted('ROLE_USER') %}
+                        <a class="nav-link" href="{{ path ('reviews') }}">Application form</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
@@ -83,6 +61,5 @@
                 </div>
             </div>
         </div>
-
     </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Tests\Entity;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Repository\UserRepository;
 use App\Repository\SecretModeRepository;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class SecretTest extends WebTestCase
@@ -38,4 +39,29 @@ class SecretTest extends WebTestCase
 
         $this->assertCount($expectedNumberOfSolicitorsAfterOneCreated, $solicitors);
     }
+    public function testRoleSecretCanNOTSeeUserList(): void
+    {
+        // Arrange
+        $method = 'GET';
+        $url = '/user';
+        $userName = 'Daredevil';
+        $accessDeniedResponseCode403 = Response::HTTP_FORBIDDEN;
+
+        // create client that automatically follow re-directs
+        $client = static::createClient();
+        $client->followRedirects();
+
+        // login user
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $testUser = $userRepository->findOneByusername($userName);
+        $client->loginUser($testUser);
+
+        // Act
+        $crawler = $client->request($method, $url);
+
+        // Assert
+        $responseCode = $client->getResponse()->getStatusCode();
+        $this->assertSame($accessDeniedResponseCode403, $responseCode);
+    }
+
 }
