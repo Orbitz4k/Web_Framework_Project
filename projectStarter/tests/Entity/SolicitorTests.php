@@ -24,7 +24,7 @@ class SolicitorTests extends WebTestCase
         $solicitor = $solicitorsRepository->findByName($solicitorName);
 
         $httpMethod = 'GET';
-        $url = '/solicitors/85/edit';
+        $url = '/solicitors/1/edit';
 
         $solicitor = $solicitorsRepository->findAll();
         $numberOfSolicitorsBeforeOneCreated = count($solicitor);
